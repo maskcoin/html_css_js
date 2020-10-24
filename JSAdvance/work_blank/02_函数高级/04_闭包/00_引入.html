@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>00_引入</title>
+</head>
+<body>
+
+<button>测试1</button>
+<button>测试2</button>
+<button>测试3</button>
+<!--
+需求: 点击某个按钮, 提示"点击的是第n个按钮"
+-->
+<script type="text/javascript">
+    var btns = document.getElementsByTagName('button')
+    //遍历加监听
+    // for (var i = 0, length = btns.length; i < length; i++) {
+    //     var btn = btns[i]
+    //     btn.index = i
+    //     btn.onclick = function () { // 元数据中的闭包：this
+    //         alert('第' + this.index + '个')
+    //     }
+    // }
+    for (var i = 0, length = btns.length; i < length; i++) {
+        (function (index) {
+            var btn = btns[index]
+            btn.onclick = function () { // 闭包：index
+                alert('第' + (index+1) + '个')
+            }
+        })(i)
+    }
+</script>
+</body>
+
+</html>
