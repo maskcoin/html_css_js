@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ball {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+
+        .ball1 {
+            background-color: red;
+            /*margin-left: 0px;*/
+        }
+
+        .ball2 {
+            background-color: yellow;
+            /*margin-left: 0px;*/
+        }
+
+        .ball3 {
+            background-color: blue;
+            /*margin-left: 0px;*/
+        }
+    </style>
+</head>
+<body>
+<div class="ball ball1" style="margin-left: 0px"></div>
+<div class="ball ball2" style="margin-left: 0px"></div>
+<div class="ball ball3" style="margin-left: 0px"></div>
+<script>
+    let ball1 = document.querySelector('.ball1')
+    let ball2 = document.querySelector('.ball2')
+    let ball3 = document.querySelector('.ball3')
+
+    function move(ball, target) {
+        return new Promise((resolve, reject) => {
+            let timer = setInterval(function () {
+                //先取到当前的left值
+                let left = parseInt(ball.style.marginLeft)
+                if (left < target) {
+                    ball.style.marginLeft = (left + 1) + 'px'
+                } else {
+                    clearInterval(timer)
+                    resolve()
+                }
+            }, 4)
+        })
+    }
+
+    function* go() {
+        yield move(ball1, 100)
+        yield move(ball2, 100)
+        yield move(ball3, 100)
+    }
+
+    function co(gen) {
+        let it = gen() //我们要让生成器持续执行
+        return new Promise((resolve, reject) => {
+            (function next(lastVal) {
+                let {value, done} = it.next(lastVal)
+                if (done) {
+                    resolve(value)
+                } else {
+                    value.then(next, reject)
+                }
+            })()
+        })
+    }
+
+    co(go)
+</script>
+</body>
+</html>

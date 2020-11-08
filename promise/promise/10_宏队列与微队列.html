@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10_宏队列与微队列</title>
+</head>
+<body>
+<script>
+    setTimeout(()=>{
+        console.log('timeout callback1()')
+        Promise.resolve(3).then(value => console.log('promise value:', value))
+    })
+    setTimeout(()=>{
+        console.log('timeout callback2()')
+    })
+    Promise.resolve(1).then(value => console.log('promise value:', value))
+    Promise.resolve(2).then(value => console.log('promise value:', value))
+</script>
+</body>
+</html>
