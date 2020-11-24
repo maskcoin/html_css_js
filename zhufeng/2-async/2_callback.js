@@ -45,9 +45,9 @@ let fs = require('fs')
 * 2.非常难以维护
 * 3.效率比较低，因为它们是串行的
 * */
-// fs.readFile('./template.txt', 'utf8', function (err, template) {
+// fs.readFile('./templates.txt', 'utf8', function (err, templates) {
 //     fs.readFile('./data.txt', 'utf8', function (err, data) {
-//         console.log(template + ' ' + data)
+//         console.log(templates + ' ' + data)
 //     })
 // })
 
@@ -58,7 +58,7 @@ let fs = require('fs')
 let EventEmitter = require('events')
 let eve = new EventEmitter()
 //这个html对象存放最终数据
-let html = {} //template data
+let html = {} //templates data
 
 //监听数据获取成功事件，当事件发生之后调用回调函数
 // eve.on('ready', function (key, value) {
@@ -68,8 +68,8 @@ let html = {} //template data
 //     }
 // })
 //
-// fs.readFile('./template.txt', 'utf8', function (err, template) {
-//     eve.emit('ready', 'template', template)
+// fs.readFile('./templates.txt', 'utf8', function (err, templates) {
+//     eve.emit('ready', 'templates', templates)
 // })
 //
 // fs.readFile('./data.txt', 'utf8', function (err, data) {
@@ -99,8 +99,8 @@ let done = render(2, function (html) {
     console.log(html)
 })
 
-fs.readFile('./template.txt', 'utf8', function (err, template) {
-    done('template', template)
+fs.readFile('./templates.txt', 'utf8', function (err, template) {
+    done('templates', template)
 })
 
 fs.readFile('./data.txt', 'utf8', function (err, data) {

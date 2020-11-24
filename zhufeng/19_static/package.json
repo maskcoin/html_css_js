@@ -1,0 +1,20 @@
+{
+  "name": "zf-server2",
+  "version": "1.0.0",
+  "description": "可以在任意目录下启动一个静态文件服务器，并且把当前目录作为静态文件根目录",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "zf-server2": "./bin/www"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "debug": "^4.3.1",
+    "handlebars": "^4.7.6"
+  }
+}
