@@ -7,6 +7,7 @@ let chalk = require('chalk')
 let url = require('url')
 let path = require('path')
 let fs = require('fs')
+let zlib = require('zlib')
 let handlebars = require('handlebars')
 let mime = require('mime')
 let {promisify} = require('util')
@@ -25,6 +26,11 @@ function list() {
     return handlebars.compile(tmp)
 }
 
+/*
+* 1.显示目录下面的文件列表和返回内容
+* 2.实现压缩的功能
+* 3.实现缓存
+* */
 class Server {
     constructor(argv) {
         this.list = list()
@@ -78,8 +84,35 @@ class Server {
     }
 
     sendFile(req, res, filepath, statObj) {
+        if (this.handleCache(req, res)) { //如果走
+            return
+        }
+
         res.setHeader('Content-Type', mime.getType(filepath))
-        fs.createReadStream(filepath).pipe(res)
+        let encoding = this.getEncoding(req, res)
+        if (encoding) {
+            fs.createReadStream(filepath).pipe(encoding).pipe(res)
+        } else {
+            fs.createReadStream(filepath).pipe(res)
+        }
+    }
+
+    handleCache(req, res) {
+        let ifModifiedSince = req.headers['if-modified-since']
+        let ifNoneMatch = req.headers['if-none-match']
+    }
+
+
+    getEncoding(req, res) {
+        //accept-encoding: gzip, deflate, br
+        let acceptEncoding = req.headers['accept-encoding']
+        if (/\bgzip\b/.test(acceptEncoding)) {
+            return zlib.createGzip()
+        } else if (/\bdeflate\b/.test(acceptEncoding)) {
+            return zlib.createDeflate()
+        } else {
+            return
+        }
     }
 
     sendDir(req,  res, listHTML) {
