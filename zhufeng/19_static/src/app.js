@@ -69,7 +69,7 @@ class Server {
                 }
             } catch (e) {
                 debug(util.inspect(e)) //inpsect把一个对象转成字符串
-                self.sendError(req, res)
+                self.sendError(req, res, e)
             }
         }).listen(self.config.port, () => {
             let url = `http://${self.config.host}:${self.config.port}`
@@ -78,18 +78,19 @@ class Server {
     }
 
 
-    sendError(req, res) {
+    sendError(req, res, e) {
         res.statusCode = 500
-        res.end(`there is something wrong in the server, please try latter`)
+        res.end(`${e.toString()}`)
     }
 
     sendFile(req, res, filepath, statObj) {
-        if (this.handleCache(req, res)) { //如果走
-            return
-        }
+        // if (this.handleCache(req, res, filepath, statObj)) { //如果走缓存，则直接返回
+        //     return
+        // }
 
-        res.setHeader('Content-Type', mime.getType(filepath))
-        let encoding = this.getEncoding(req, res)
+        res.setHeader('Content-Type', mime.getType(filepath)+';charset=utf8')
+        let encoding
+        // let encoding = this.getEncoding(req, res)
         if (encoding) {
             fs.createReadStream(filepath).pipe(encoding).pipe(res)
         } else {
@@ -97,9 +98,20 @@ class Server {
         }
     }
 
-    handleCache(req, res) {
+    handleCache(req, res,filepath, statObj) {
         let ifModifiedSince = req.headers['if-modified-since']
         let ifNoneMatch = req.headers['if-none-match']
+        res.setHeader('Cache-Control', 'private, max-age=30')
+        let etag = statObj.size
+        let lastModified = statObj.ctime.toUTCString()
+        res.setHeader('ETag', etag.toString())
+        res.setHeader('Last-Modified', lastModified)
+        if ((ifNoneMatch && ifNoneMatch === etag) || (ifModifiedSince && ifModifiedSince === lastModified)) {
+            res.writeHead(304)
+            res.end()
+            return true
+        }
+        return false
     }
 
 
@@ -107,11 +119,13 @@ class Server {
         //accept-encoding: gzip, deflate, br
         let acceptEncoding = req.headers['accept-encoding']
         if (/\bgzip\b/.test(acceptEncoding)) {
+            res.setHeader('Content-Encoding', 'gzip')
             return zlib.createGzip()
         } else if (/\bdeflate\b/.test(acceptEncoding)) {
+            res.setHeader('Content-Encoding', 'deflate')
             return zlib.createDeflate()
         } else {
-            return
+            return false
         }
     }
 
