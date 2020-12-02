@@ -1,5 +1,5 @@
 //要创建一个服务器
-process.env.DEBUG = 'static:*'
+process.env.DEBUG = 'public:*'
 let config = require('./config')
 let util = require('util')
 let http = require('http')
@@ -18,7 +18,7 @@ let readdir = promisify(fs.readdir)
 
 //这是一个在控制台输出的模块，名称有特点，由两部分组成，第一部分一般是项目名，第二部分一般是模块名
 //每个debug实例都有一个名字，是否在控制台打印，取决于环境变量中DEBUG的值是否等于static:app
-let debug = require('debug')('static:app')
+let debug = require('debug')('public:app')
 
 //编译模版，得到一个渲染的方法，然后传入实际数据就可以得到渲染后的HTML了
 function list() {

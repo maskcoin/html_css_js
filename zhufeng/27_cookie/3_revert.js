@@ -1,0 +1,1 @@
+console.log(decodeURIComponent('s%3Azfpx.VKQXjP89ErcA1cAPHULsb%2FohG1NV0A3GRg5ejX9mYuY'))

@@ -1,0 +1,6 @@
+let querystring = require('querystring')
+let qs = require('qs')
+let obj = {name:'zfpx', home:{name:'beijing'}}
+// let r = querystring.stringify(obj)
+let r = qs.stringify(obj)
+console.log(r)

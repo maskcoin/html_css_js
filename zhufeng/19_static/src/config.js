@@ -1,4 +1,4 @@
-let debug = require('debug')('static:config')
+let debug = require('debug')('public:config')
 let path = require('path')
 let config = {
     host: 'localhost',
