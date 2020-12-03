@@ -13,14 +13,14 @@
         .box1 {
             width: 200px;
             height: 200px;
-            background-color: #bbffaa;
+            background-color: yellow;
             float: left;
         }
 
         .box2 {
-            width: 400px;
-            height: 150px;
-            background-color: pink;
+            width: 100px;
+            height: 100px;
+            background-color: #bbffaa;
             float: right;
         }
 
@@ -28,21 +28,23 @@
             width: 200px;
             height: 200px;
             background-color: orange;
-            /* 
+            /*
                 由于box1的浮动，导致box3位置上移
                     也就是box3受到了box1浮动的影响，位置发生了改变
-                如果我们不希望某个元素因为其他元素的浮动的影响而改变位置
-                    可以通过clear属性来清除浮动元素对当前元素的影响 
+
+                如果我们不希望某个元素因为其他元素浮动的影响而改变位置
+                    可以通过clear属性来清除浮动元素对当前元素的影响
+
                 clear
-                    - 作用：清除浮动元素对当前元素所产生的影响
+                    - 作用：清除浮动元素对当前元素的影响
                     - 可选值：
                         left 清除左侧浮动元素对当前元素的影响
                         right 清除右侧浮动元素对当前元素的影响
-                        both  清除中两侧中最大影响的那侧
+                        both 清除两侧中
 
                     原理：
-                        设置清除浮动以后，浏览器会自动为元素添加一个上外边距，
-                            以使其位置不受其他元素的影响
+                        设置清除浮动以后，浏览器会自动对当前元素添加一个上外边距
+                            以使其位置不受其他浮动元素的影响
             */
             clear: both;
         }

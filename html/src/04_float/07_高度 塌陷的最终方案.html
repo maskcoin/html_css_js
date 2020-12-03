@@ -7,31 +7,25 @@
     <title>Document</title>
     <style>
         .box1 {
-            width: 200px;
-            height: 200px;
-            background-color: #bbffaa;
-        }
-
-        .box1::before {
-            content: '';
-            display: table;
+            border: 10px red solid;
+            /* overflow: hidden; */
+            /* clear: both; */
         }
 
         .box2 {
             width: 100px;
             height: 100px;
-            background-color: orange;
-            margin-top: 100px;
+            background-color: #bbffaa;
+            float: left;
         }
 
-        /*
-            完美解决方案:
-                解决外边距重叠和高度塌陷的问题
-        */
-        .clearfix::before,
-        .clearfix::after {
+        /* .box3 {
+            clear: both;
+        } */
+
+        .box1::after {
             content: '';
-            display: table;
+            display: block;
             clear: both;
         }
     </style>
@@ -40,6 +34,7 @@
 <body>
     <div class="box1">
         <div class="box2"></div>
+        <!-- <div class="box3"></div> -->
     </div>
 </body>
 
