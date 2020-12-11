@@ -1,0 +1,40 @@
+.box1 .box2 {
+  color: red;
+}
+.box1 > .box3 {
+  color: red;
+}
+.box1 > .box3:hover {
+  color: blue;
+}
+.box1:hover {
+  color: orange;
+}
+div .box1 {
+  width: 100px;
+}
+.p1,
+.p2 {
+  width: 100px;
+  height: 200px;
+}
+.p2 {
+  color: red;
+}
+.p3 {
+  width: 100px;
+  height: 200px;
+}
+.p5 {
+  width: 100px;
+  height: 100px;
+  background-color: #bbffaa;
+}
+div {
+  width: 200px;
+  height: 300px;
+  border: 1px solid #bbffaa;
+}
+span {
+  color: #ff8000;
+}

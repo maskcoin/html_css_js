@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            width: 800px;
+            height: 800px;
+            background-color: silver;
+            overflow: hidden;
+        }
+
+        .box1 div {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 100px;
+        }
+
+        .box2 {
+            background-color: #bbffaa;
+            /* margin-left: auto; */
+            /* transition: all 2s; */
+            /* 
+                过度（transition）
+                    - 通过过度可以指定一个属性发生变化时的切换方式
+                    - 通过过度可以创建一些非常好的效果，提升用户体验
+             */
+            /* 
+            transition-property: 指定要执行过度的属性 
+                多个属性间使用,隔开
+                如果所有属性都需要过度，则可以使用all关键字
+                大部分属性都支持过度效果，注意过度时必须时从一个有效数值向另外一个有效数值过度
+            */
+            /* transition-property: width, height; */
+            transition-property: all;
+            /* 
+            transition-duration: 指定过度效果的持续时间:
+                时间单位：s 和 ms 1s = 1000ms
+            */
+            /* transition-duration: 100ms, 2s; */
+            transition-duration: 2s;
+
+            /* 
+            transition-timing-function: 过度的时序函数
+                指定过度的执行的方式
+                可选值：
+                    ease 默认值，慢速开始，先加速，再减速
+                    linear 
+                    ease-in 加速运动
+                    ease-out
+                    ease-in-out 先加速 后减速
+                    cubic-bezier() 来指定时序函数
+            */
+
+            /* transition-timing-function: steps(); */
+            /* transition-delay: 延迟开始执行 */
+            transition-delay: 2s;
+        }
+
+        .box1:hover div {
+            /* width: 200px;
+            height: 200px; */
+            /* background-color: orange; */
+            margin-left: 700px;
+        }
+
+        .box3 {
+            background-color: orange;
+            transition-property: all;
+            transition-duration: 2s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+        <div class="box3"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box1 {
+            width: 800px;
+            height: 800px;
+            background-color: silver;
+            overflow: hidden;
+        }
+
+        .box1 div {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 100px;
+        }
+
+        .box2 {
+            background-color: #bbffaa;
+            /* 设置box2的动画 */
+            animation-name: test;
+            animation-duration: 5s;
+            /* animation-delay: 1s; */
+            animation-timing-function: linear;
+            /* 
+            animation-iteration-count: 动画执行的次数; 
+                可选值：
+                    次数
+                    infinite 无限执行
+            */
+            animation-iteration-count: 2;
+            /* 
+            animation-direction:
+                指定动画运行的方向：
+                    默认值 normal 从 from 向 to运行，每次都是这样
+                    reverse
+                    alternate normal和reverse交替执行
+             */
+            animation-direction: alternate;
+            /* 
+                animation-play-state: 设置动画的执行状态 
+                可选值：
+                    running 默认值 动画执行
+                    paused 动画暂停
+            */
+            animation-play-state: paused;
+
+            /* 
+            animation-fill-mode: 动画的填充模式
+                可选值：
+                    none 默认值 动画执行完毕元素回到原来位置
+                    forwards 动画执行完毕元素会停止在动画结束的位置
+            */
+        }
+
+        /* 
+        动画 
+            动画和过度类似，都可以实现一些动态的效果
+                不同的是过度需要再某个属性发生变化时才会触发
+                动画可以自动触发动态效果
+            设置动画效果，必须先要设置一个关键帧，关键帧设置了动画执行的每一个步骤
+            
+        */
+        @keyframes test {
+            from {
+                margin-left: 0;
+            }
+
+            to {
+                margin-left: 700px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box1">
+        <div class="box2"></div>
+        <!-- <div class="box3"></div> -->
+    </div>
+</body>
+
+</html>

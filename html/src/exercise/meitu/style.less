@@ -1,0 +1,165 @@
+a {
+    text-decoration: none;
+    color: white;
+
+    &:active {
+        color: rgb(197, 196, 196);
+    }
+}
+
+// 导航条外部容器
+.top-bar {
+    height: 48px;
+    background-color: black;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// 设置左侧的导航图标
+.left-menu {
+    &:active {
+        .nav {
+            display: block;
+        }
+    }
+    // position: relative;
+    // 设置菜单
+    .nav {
+        display: none;
+        // visibility: hidden;
+        position: absolute;
+        top: 48px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: black;
+        padding-top: 50px;
+
+        li {
+            width: 80%;
+            margin: 0 auto;
+            border-bottom: 1px solid #757474;
+
+            a {
+                line-height: 44px;
+                font-size: 14px;
+                display: block;
+            }
+
+            &:last-child a {
+                display: inline-block;
+                margin-right: 6px;
+            }
+
+            span {
+                color: white;
+                font-size: 14px;
+            }
+        }
+    }
+
+    // 图标
+    .menu-icon {
+        width: 18px;
+        height: 48px;
+        position: relative;
+
+        // 导航的线
+        li {
+            width: 18px;
+            height: 1px;
+            background-color: white;
+            position: absolute;
+
+            transform-origin: left center;
+            transition: 1s;
+        }
+
+        li:nth-child(1) {
+            top: 18px;
+        }
+
+        li:nth-child(2) {
+            top: 24px;
+        }
+
+        li:nth-child(3) {
+            top: 30px;
+        }
+
+        // 鼠标移入以后的效果，正常项目时，使用 js实现
+        &:active {
+            li:nth-child(1) {
+                top: 18px;
+    
+                // 向下旋转
+                transform: rotate(40deg);
+            }
+    
+            li:nth-child(2) {
+                top: 24px;
+                visibility: hidden;
+            }
+    
+            li:nth-child(3) {
+                top: 30px;
+                transform: rotate(-40deg);
+            }
+        }
+    }
+}
+
+.logo {
+    a {
+        text-indent: -999999px;
+        display: block;
+        width: 122px;
+        height: 32px;
+        background-image: url('../img/18/dff63979.sprites-index@2x.png');
+        background-size: 400px 400px;
+    }
+}
+
+// 设置媒体查询
+@media only screen {
+    // 断点768px
+    @media (min-width: 768px) {
+        // 调整顺序
+        .left-menu {
+            order: 2;
+            flex: auto;
+            // 隐藏菜单图标
+            .menu-icon {
+                display: none;
+            } 
+
+            // 显示菜单
+            .nav {
+                display: flex;
+                position: static;
+                padding: 0;
+                li {
+                    width: auto;
+                    border-bottom: none;
+                    a {
+                        line-height: 48px;
+                    }
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+
+        .logo {
+            order: 1;
+        }
+
+        .user-info {
+            order: 3;
+        }
+    }
+}
